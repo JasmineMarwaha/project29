@@ -42,7 +42,7 @@ world = engine.world;
   block17 = new Box(730, 145, 30, 30);
   block18 = new Box(700, 115, 30, 30);
 
-  hexagon = Bodies.circle(300, 200, 20);
+  hexagon = Bodies.circle(300, 200, 30, 30);
   World.add(world, hexagon);
 
   slingshot = new SlingShot(this.hexagon, {x:100, y:200});
@@ -82,7 +82,7 @@ function draw() {
   block17.display();
   block18.display();
 
- // hexagon.display();
+  ellipse(hexagon.position.x, hexagon.position.y, 30, 30);
 
   slingshot.display();
 
@@ -113,10 +113,22 @@ function draw() {
 
 }
 
-function Mousedragged() {
+function mousedragged() {
+
+  Matter.Body.setPosition(hexagon.body, {x: mouseX, y:mouseY});
 
 }
 
-function Mousereleased() {
+function mousereleased() {
+  slingshot.fly();
   
 }
+
+function keyPressed() {
+  if(keyCode == 32) {
+    Matter.Body.setPosition(hexagon.body, {x:100, y:200})
+    slingshot.attach(hexagon.body);
+  }
+}
+
+
