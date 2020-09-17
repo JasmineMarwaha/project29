@@ -1,26 +1,31 @@
 class Box  {
-    constructor(x, y, width, height, color){ 
+    constructor(x, y, width, height){ 
       var options = {
-        restitution: 0.4,
+        //isStatic: true,
+        restitution: 0.4, 
         friction: 0,
       }
       this.body = Bodies.rectangle(x, y, width, height, options);
       this.width = width;
       this.height = height;
-      this.color = color;
-      this.Visiblity = 255;
       World.add(world, this.body);
+      this.Visiblity = 255;
+    }
+    score() {
+      if(this.Visiblity < 0 && this.Visiblity > -105){
+        score++
+      }
     }
     display() {
-      if(this.body.speed < 6) {
-        var pos = this.body.position;
+      if(this.body.speed < 3) {
+      var pos = this.body.position;
         var angle = this.body.angle;
         push();
-        translate(pos.x, pos.y);
-        rotate(angle)
-        fill(this.color);
         rectMode(CENTER);
-      rect(0, 0 ,this.width, this.height);
+        translate(pos.x, pos.y);
+        rotate(angle);
+      fill("pink");
+      rect(0, 0, this.width, this.height);
       pop();
       }
       else {
@@ -33,3 +38,7 @@ class Box  {
       }
     }
   }
+
+
+
+
